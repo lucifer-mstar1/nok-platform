@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row align-items-center mt-3 gy-4">
+  <div class="col-lg-6">
+    <span class="badge nok-badge mb-3">N.O.K · Network of Knowledge</span>
+    <h1 class="display-5 fw-semibold mb-3">
+      Turn your study hours<br>
+      into <span class="text-success">Z Coins</span>, skills and confidence.
+    </h1>
+    <p class="lead text-secondary">
+      N.O.K is a learning arena where Uzbek students train with top teachers,
+      compete in friendly tournaments and get instant help from an AI teacher –
+      all inside one wallet with Z Coins.
+    </p>
+    <div class="d-flex flex-wrap gap-2 my-3">
+      <a href="{% url 'accounts:register' %}" class="btn btn-success btn-lg nok-glow">
+        Start for free
+      </a>
+      <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-lg">
+        I already have an account
+      </a>
+    </div>
+    <div class="small text-secondary">
+      No risk: you can start with free lessons and AI questions.<br>
+      When you are ready to commit seriously, convert so'm to Z Coins and unlock full parts.
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="nok-card p-4">
+      <h6 class="text-secondary mb-3">Live snapshot of a motivated student</h6>
+      <div class="row g-3">
+        <div class="col-6">
+          <div class="border rounded-4 p-3">
+            <div class="small text-secondary">Wallet</div>
+            <div class="fw-semibold fs-5 text-success">320.5 Z</div>
+            <div class="small text-secondary">3 200 000 so'm</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="border rounded-4 p-3">
+            <div class="small text-secondary">Progress</div>
+            <div class="fw-semibold">Level 4</div>
+            <div class="small text-secondary">Streak: 🔥 7 days</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="border rounded-4 p-3 mb-2">
+            <div class="small">Math Part A – 30 lessons</div>
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-secondary">Unlocked with 30 Z</small>
+              <span class="badge bg-success">Paid = more focus</span>
+            </div>
+          </div>
+          <div class="border rounded-4 p-3 mb-2">
+            <div class="small">Tournament: Algebra Battle</div>
+            <small class="text-secondary">Entry: 10 Z · Prize: 200 Z · Sunday 18:00</small>
+          </div>
+          <div class="border rounded-4 p-3">
+            <div class="small">AI Teacher</div>
+            <small class="text-secondary">"I’m here 24/7. When you feel stuck, talk to me instead of giving up."</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

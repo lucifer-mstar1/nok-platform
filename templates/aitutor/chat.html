@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">AI Teacher</h2>
+<p class="small text-secondary">
+  When you feel stuck, your brain wants to escape (TikTok, games). Instead, train it to ask for help.
+  Type your confusion here – the AI teacher will respond step-by-step.
+</p>
+<div class="row g-3">
+  <div class="col-lg-6">
+    <div class="nok-card p-3 h-100">
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-2">
+          <label class="form-label small">Your question</label>
+          <textarea name="question" rows="7" class="form-control form-control-sm" placeholder="Example: I don’t understand limits. Can you explain slowly with simple examples?">{{ question }}</textarea>
+        </div>
+        <button class="btn btn-success btn-sm">Ask AI teacher</button>
+        <div class="form-text text-secondary small mt-1">
+          Tip: Ask about one concrete step, not everything at once. Small questions → fast progress.
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="nok-card p-3 h-100">
+      <h6 class="text-secondary mb-2">Response</h6>
+      <div class="small">
+        {% if error %}
+          <div class="text-danger">{{ error }}</div>
+        {% elif answer %}
+          <pre class="text-light small" style="white-space:pre-wrap;">{{ answer }}</pre>
+        {% else %}
+          <p class="text-secondary">The AI teacher will appear here and talk to you like a friendly tutor.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

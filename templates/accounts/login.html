@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6 col-lg-5">
+    <div class="nok-card p-4">
+      <h3 class="mb-3">Sign in to N.O.K</h3>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="form-text text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button class="btn btn-success w-100">Sign in</button>
+      </form>
+      <p class="small text-secondary mt-3">
+        Don’t have an account?
+        <a href="{% url 'accounts:register' %}" class="link-success">Join N.O.K</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

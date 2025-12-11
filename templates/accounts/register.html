@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-7 col-lg-6">
+    <div class="nok-card p-4">
+      <h3 class="mb-3">Create your N.O.K account</h3>
+      <p class="small text-secondary">
+        Choose your role carefully: students invest Z Coins into knowledge, teachers earn from their content,
+        CEOs orchestrate tournaments and community.
+      </p>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field}}
+            {% if field.help_text %}
+              <div class="form-text text-muted small">{{ field.help_text }}</div>
+            {% endif %}
+            {% if field.errors %}
+              <div class="form-text text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button class="btn btn-success w-100">Join N.O.K</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

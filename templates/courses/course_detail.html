@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="nok-card p-3 mb-3">
+      <span class="badge bg-success mb-2">{{ course.subject }}</span>
+      <h3>{{ course.title }}</h3>
+      <div class="small text-secondary mb-1">
+        by {{ course.teacher.display_name }}
+      </div>
+      <div class="small text-warning mb-2">
+        Average rating: {{ avg_rating|floatformat:1 }} ★
+      </div>
+      <p class="small text-secondary">{{ course.description }}</p>
+    </div>
+    <div class="nok-card p-3">
+      <h6 class="mb-2">Student reviews</h6>
+      {% for r in reviews %}
+        <div class="border-bottom border-secondary pb-2 mb-2 small">
+          <div class="d-flex justify-content-between">
+            <span class="fw-semibold">{{ r.student.display_name }}</span>
+            <span class="text-warning">{{ r.rating }} ★</span>
+          </div>
+          <div class="text-secondary">{{ r.comment }}</div>
+          <div class="text-muted">{{ r.created_at|date:"Y-m-d H:i" }}</div>
+        </div>
+      {% empty %}
+        <p class="small text-secondary">No reviews yet. Be the first one to share your experience after completing a part.</p>
+      {% endfor %}
+      <form method="post" action="{% url 'courses:add_review' course.id %}" class="small mt-2">
+        {% csrf_token %}
+        <div class="row g-2 align-items-center">
+          <div class="col-auto">
+            <label class="form-label mb-0">Your rating</label>
+          </div>
+          <div class="col-auto">
+            <select name="rating" class="form-select form-select-sm">
+              {% for i in "54321" %}
+                <option value="{{ i }}">{{ i }} ★</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12 mt-2">
+            <textarea name="comment" rows="2" class="form-control form-control-sm" placeholder="What did you like? What became easier after this course?"></textarea>
+          </div>
+          <div class="col-12 mt-2">
+            <button class="btn btn-outline-success btn-sm">Submit review</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="nok-card p-3 mb-3">
+      <h6 class="mb-2">Available parts</h6>
+      {% for part in parts %}
+        <div class="border rounded-4 p-2 mb-2 small">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-semibold">{{ part.name }}</div>
+              <div class="text-secondary">{{ part.num_videos }} videos · {{ part.num_texts }} texts</div>
+            </div>
+            <div class="text-end">
+              <div class="fw-semibold text-success">{{ part.price_z }} Z</div>
+              <form method="post" action="{% url 'courses:buy_part' part.id %}">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-success mt-1">Unlock</button>
+              </form>
+            </div>
+          </div>
+          <div class="text-secondary mt-1">
+            Pay once, then rewatch anytime. Your brain takes paid content more seriously – use that to your advantage.
+          </div>
+        </div>
+      {% empty %}
+        <p class="small text-secondary">No parts configured yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
